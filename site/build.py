@@ -30,6 +30,20 @@ table { border-collapse: collapse; font: 13px/1.4 system-ui, sans-serif; margin:
 th, td { border-bottom: 1px solid var(--line); padding: 4px 6px; text-align:left; vertical-align: top; }
 img { max-width: 100%; height:auto; }
 footer { font: 13px/1.5 system-ui, sans-serif; color: var(--muted); margin-top: 3rem; }
+.lede { font-size: 1.05rem; }
+ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 1rem 0; }
+ol.steps > li { counter-increment: step; position: relative; padding: .8rem 1rem .8rem 3.2rem;
+  border: 1px solid var(--line); border-radius: 8px; margin-bottom: .8rem; }
+ol.steps > li::before { content: counter(step); position: absolute; left: .9rem; top: .8rem;
+  width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--accent); color: var(--bg);
+  font: 600 14px/1.7rem system-ui, sans-serif; text-align: center; }
+.step-title { font-weight: 700; }
+.meta { font: 13px/1.5 system-ui, sans-serif; color: var(--muted); margin-top: .3rem; }
+.funnel { display: grid; gap: 6px; margin: 1rem 0; font: 14px/1.4 system-ui, sans-serif; }
+.funnel div { background: var(--accent); color: var(--bg); padding: .45rem .8rem; border-radius: 6px;
+  max-width: 100%; }
+.funnel b { font-size: 1.05rem; }
+code { font-size: .88em; }
 """
 
 
@@ -47,7 +61,8 @@ def build() -> Path:
     has_pdf = (ROOT / "NOTE.pdf").exists()
     if has_pdf:
         shutil.copyfile(ROOT / "NOTE.pdf", SITE / "NOTE.pdf")
-    links = [f'<a href="{REPO}">Code and coded data on GitHub</a>',
+    links = ['<a href="method.html">Methodology</a>',
+             f'<a href="{REPO}">Code and coded data on GitHub</a>',
              f'<a href="{REPO}/blob/main/results/coding_log.csv">Coding log</a>',
              f'<a href="{REPO}/blob/main/DEVIATIONS.md">Deviations from the plan</a>']
     if has_pdf:
@@ -69,6 +84,181 @@ def build() -> Path:
         "</main></body></html>")
     out = SITE / "index.html"
     out.write_text(html, encoding="utf-8", newline="\n")
+    build_method()
+    return out
+
+
+def _csv(path: Path) -> list[dict]:
+    import csv
+    with open(path, encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def _esc(text: str) -> str:
+    import html as h
+    return h.escape(str(text))
+
+
+def build_method() -> Path:
+    """site/method.html: the approach, step by step, with every count read from the result files."""
+    import json
+
+    import yaml
+
+    m = json.loads((ROOT / "results" / "manifest.json").read_text(encoding="utf-8"))
+    log = _csv(ROOT / "results" / "coding_log.csv")
+    counts = _csv(ROOT / "results" / "candidate_counts.csv")
+    corpus = _csv(ROOT / "data" / "corpus.csv")
+    lock = {r["id"]: r for r in _csv(ROOT / "data" / "corpus_lock.csv")}
+    book = yaml.safe_load((ROOT / "codebook.yaml").read_text(encoding="utf-8"))
+
+    passages = [r for r in log if r["pdf_page"]]
+    relevant = [r for r in passages if r["final_level"] in ("explicit_palm", "generic")]
+    not_relevant = [r for r in passages if r["final_level"] == "not_relevant"]
+    changed_by_review = [r for r in passages if r["keyword_rule"] and r["first_review"]
+                         and r["keyword_rule"] != r["first_review"]]
+    added_by_review = [r for r in passages if not r["keyword_rule"]]
+    checked = [r for r in log if r["checked_by_author"] == "yes"]
+    changed_by_author = [r for r in checked if r["author_check"] != r["first_review"]]
+    rounds = {}
+    for r in checked:
+        key = "CP1" if "CP1" in r["author_note"] else ("S3" if "S3" in r["author_note"] else "other")
+        rounds[key] = rounds.get(key, 0) + 1
+    per_doc = {}
+    for r in counts:
+        per_doc[r["doc"]] = per_doc.get(r["doc"], 0) + int(r["candidates"])
+
+    doc_rows = "".join(
+        f"<tr><td><code>{_esc(c['id'])}</code></td><td>{_esc(c['owner'])}</td><td>{_esc(c['kind'])}</td>"
+        f"<td>{_esc(c['period'])}</td><td>{_esc(lock.get(c['id'], {}).get('pages', '') or 'not obtained')}</td>"
+        f"<td>{per_doc.get(c['id'], 0) if c['id'] in per_doc else '-'}</td></tr>"
+        for c in corpus)
+    code_rows = "".join(
+        f"<tr><td><code>{_esc(cid)}</code></td><td>{_esc(c['label'])}</td><td>{_esc(c['description'])}</td>"
+        f"<td>{_esc(', '.join(k.replace(chr(92) + 'b', '') for k in c['keywords'][:4]))} ...</td></tr>"
+        for cid, c in book["codes"].items())
+    deviations = markdown.markdown((ROOT / "DEVIATIONS.md").read_text(encoding="utf-8").split("\n", 2)[2],
+                                   extensions=["tables"])
+    deviations = deviations.replace("<table>", '<div class="table-wrap"><table>').replace("</table>", "</table></div>")
+
+    stages = [
+        (m["candidates"], "candidate passages found by keyword"),
+        (len(log), "rows on the coding sheet (best candidates per document and code, plus empty cells)"),
+        (len(passages), "passages read and coded"),
+        (len(relevant), "passages that speak to their code (explicit or generic)"),
+        (m["cells"], "cells in the result: 6 documents by 10 codes"),
+        (m["deciding_checked"], "deciding passages, every one checked by the author"),
+    ]
+    # evenly stepped widths show the order of the stages; the counts carry the size
+    funnel = "".join(f'<div style="width:{100 - 8 * i}%"><b>{n}</b> {text}</div>'
+                     for i, (n, text) in enumerate(stages))
+    body = f"""
+<p class="lede">This page shows how the study went from six public documents to its findings. Every
+count on this page is read from the result files in the repository when the site is built.</p>
+
+<h2>The question</h2>
+<p>How do the policy documents of India's oil palm mission (NMEO-OP) and the sustainability
+disclosures of the processors expanding into North-East India represent labour (on plantations, in
+mills and in social reproduction) and its link to the environment? What do they leave out that only
+fieldwork with workers can show?</p>
+
+<h2>The approach in six steps</h2>
+<ol class="steps">
+<li><div class="step-title">Collect the documents</div>
+Six public documents: the 2021 approval of the oil palm mission, a December 2025 Lok Sabha answer on
+the North-East, the FY2024-25 BRSRs of Godrej Agrovet and Patanjali Foods, the RSPO and Sattva
+smallholder study, and the 2024 oilseeds-mission guidelines as context. Each file is fingerprinted
+(SHA-256) so that a rerun can prove it used the same documents; the text is extracted page by page.
+<div class="meta">Output: <code>data/corpus.csv</code>, <code>data/corpus_lock.csv</code>. The documents
+themselves stay with their owners and are not published.</div></li>
+<li><div class="step-title">Fix the codebook before coding</div>
+Ten codes taken from the four literatures named in the PALMWORK project (labour regime analysis,
+feminist labour geography, environmental labour studies, political ecology), and three levels for
+each document and code: <em>explicit</em> for oil palm, <em>generic</em> (company-wide or
+scheme-wide), <em>absent</em>.
+<div class="meta">Output: <code>codebook.yaml</code>. One change after the first round (growers and hired
+workers split), logged below.</div></li>
+<li><div class="step-title">Find candidate passages</div>
+A keyword search per code finds {m['candidates']} candidate passages and marks those that sit near an
+oil palm or North-East word. Keywords only find candidates. They decide nothing.
+<div class="meta">Output: <code>results/candidate_counts.csv</code>.</div></li>
+<li><div class="step-title">Code the passages, in three layers</div>
+For each document and code, the strongest candidates go to a coding sheet. A keyword rule proposes a
+level; a first review reads each passage and corrects the proposal ({len(changed_by_review)} proposals
+changed, {len(not_relevant)} passages judged not relevant, {len(added_by_review)} passage added by
+hand); the author then checks it. A passage can also count for a second code.
+<div class="meta">Output: <code>results/coding_log.csv</code> (all three layers for every row, without
+the document text) and <code>results/coded_passages.csv</code> (short excerpts with page numbers).</div></li>
+<li><div class="step-title">Check what decides each result</div>
+The level of a cell is the strongest relevant passage. The author checked {len(checked)} rows in two
+rounds ({rounds.get('CP1', 0)} at the first checkpoint, {rounds.get('S3', 0)} at the second), covering
+the deciding passage of all {m['deciding_total']} non-empty cells. The author changed
+{len(changed_by_author)} of the first-review levels.
+<div class="meta">Output: <code>results/presence_matrix.csv</code>.</div></li>
+<li><div class="step-title">Report from the files, not by hand</div>
+A script writes the figure, the numbers file and the results block of the README and the note. Tests
+check that every number in that block comes from the numbers file, that the text is clean, and that
+the pipeline gives the same output when it runs again.
+<div class="meta">Output: <code>results/manifest.json</code>, <code>results/presence_matrix.png</code>,
+<code>NOTE.md</code>, <code>NOTE.pdf</code>.</div></li>
+</ol>
+
+<h2>From candidates to findings</h2>
+<div class="funnel">{funnel}</div>
+
+<h2>The documents</h2>
+<div class="table-wrap"><table><thead><tr><th>id</th><th>Owner</th><th>Kind</th><th>Period</th>
+<th>Pages</th><th>Candidates</th></tr></thead><tbody>{doc_rows}</tbody></table></div>
+<p class="meta">The NMEO-OP operational guidelines could not be obtained: the government servers refused
+the download, so the study names their absence as a limit.</p>
+
+<h2>The codebook</h2>
+<div class="table-wrap"><table><thead><tr><th>Code</th><th>Label</th><th>What it covers</th>
+<th>Example keywords</th></tr></thead><tbody>{code_rows}</tbody></table></div>
+<p><b>Levels.</b> <em>explicit</em>: the document says something about the code for oil palm work,
+workers, growers or places. <em>generic</em>: it addresses the code company-wide or scheme-wide,
+without tying it to oil palm. <em>absent</em>: it does not address the code. On the coding sheet a
+passage can also be <em>not relevant</em> when a keyword matched in another sense (for example
+"Union Cabinet" for the code on trade unions).</p>
+
+<h2>Changes to the plan</h2>
+<p>Every change, with its date and reason. None was made to alter a result.</p>
+{deviations}
+
+<h2>Limits</h2>
+<ul>
+<li>Documents show what organisations choose to say. Absence in a document is not absence on the ground.</li>
+<li>BRSR covers a company's own workforce, so it cannot be expected to show workers employed by growers or contractors.</li>
+<li>The NMEO-OP operational guidelines are missing.</li>
+<li>One coder: the author checked every deciding passage, but no second coder assessed reliability.</li>
+<li>Six documents, in English, from one financial year for the companies; keyword search can miss passages that use other words.</li>
+</ul>
+
+<h2>Rebuild it yourself</h2>
+<pre><code>uv sync
+uv run python run_all.py            # fetch, fingerprint, extract, code, report, site
+uv run pytest
+uv run python scripts/build_pdf.py  # NOTE.pdf</code></pre>
+"""
+    links = ['<a href="index.html">Results and note</a>', '<a href="NOTE.pdf">Note as PDF</a>',
+             f'<a href="{REPO}">Code on GitHub</a>',
+             f'<a href="{REPO}/blob/main/results/coding_log.csv">Coding log</a>']
+    page = (
+        "<!doctype html><html lang='en'><head><meta charset='utf-8'>"
+        "<meta name='viewport' content='width=device-width, initial-scale=1'>"
+        "<title>Methodology: labour in the paperwork</title>"
+        "<meta name='description' content='How the desk study on labour in India&#39;s oil palm "
+        "paperwork was carried out, step by step.'>"
+        f"<style>{CSS}</style></head><body><main>"
+        "<h1>Methodology</h1>"
+        f"<div class='bar'>{' · '.join(links)}</div>"
+        "<p class='posture'>An independent desk study by Nikhil Sehgal on public documents only. It is "
+        "not an output of the University of Bonn, the PALMWORK project or any company named.</p>"
+        f"{body}"
+        "<footer>Built from the result files by <code>site/build.py</code>.</footer>"
+        "</main></body></html>")
+    out = SITE / "method.html"
+    out.write_text(page, encoding="utf-8", newline="\n")
     return out
 
 

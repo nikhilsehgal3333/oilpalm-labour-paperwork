@@ -1,0 +1,172 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Methodology: labour in the paperwork</title><meta name='description' content='How the desk study on labour in India&#39;s oil palm paperwork was carried out, step by step.'><style>
+:root { --bg:#fbfbf9; --fg:#1b1b1b; --muted:#5b5b5b; --line:#d9d9d4; --accent:#08519c; }
+@media (prefers-color-scheme: dark) { :root { --bg:#141414; --fg:#e8e8e3; --muted:#a3a39c;
+  --line:#3a3a36; --accent:#7fb3e6; } img.chart { background:#fff; border-radius:4px; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 Georgia,'Times New Roman',serif; }
+main { max-width: 820px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 1.9rem; line-height:1.2; margin: 0 0 .3rem; }
+h2 { font-size: 1.25rem; margin: 2rem 0 .5rem; border-top:1px solid var(--line); padding-top:1.2rem; }
+a { color: var(--accent); }
+.bar { display:flex; flex-wrap:wrap; gap:.6rem 1.2rem; font: 14px/1.4 system-ui, sans-serif; margin: 1rem 0 1.5rem; }
+.posture { font: 13px/1.5 system-ui, sans-serif; color: var(--muted); border-left:3px solid var(--line);
+  padding: .4rem .8rem; margin: 1rem 0; }
+.table-wrap { overflow-x:auto; }
+table { border-collapse: collapse; font: 13px/1.4 system-ui, sans-serif; margin: .8rem 0; min-width: 640px; }
+th, td { border-bottom: 1px solid var(--line); padding: 4px 6px; text-align:left; vertical-align: top; }
+img { max-width: 100%; height:auto; }
+footer { font: 13px/1.5 system-ui, sans-serif; color: var(--muted); margin-top: 3rem; }
+.lede { font-size: 1.05rem; }
+ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 1rem 0; }
+ol.steps > li { counter-increment: step; position: relative; padding: .8rem 1rem .8rem 3.2rem;
+  border: 1px solid var(--line); border-radius: 8px; margin-bottom: .8rem; }
+ol.steps > li::before { content: counter(step); position: absolute; left: .9rem; top: .8rem;
+  width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--accent); color: var(--bg);
+  font: 600 14px/1.7rem system-ui, sans-serif; text-align: center; }
+.step-title { font-weight: 700; }
+.meta { font: 13px/1.5 system-ui, sans-serif; color: var(--muted); margin-top: .3rem; }
+.funnel { display: grid; gap: 6px; margin: 1rem 0; font: 14px/1.4 system-ui, sans-serif; }
+.funnel div { background: var(--accent); color: var(--bg); padding: .45rem .8rem; border-radius: 6px;
+  max-width: 100%; }
+.funnel b { font-size: 1.05rem; }
+code { font-size: .88em; }
+</style></head><body><main><h1>Methodology</h1><div class='bar'><a href="index.html">Results and note</a> · <a href="NOTE.pdf">Note as PDF</a> · <a href="https://github.com/nikhilsehgal3333/oilpalm-labour-paperwork">Code on GitHub</a> · <a href="https://github.com/nikhilsehgal3333/oilpalm-labour-paperwork/blob/main/results/coding_log.csv">Coding log</a></div><p class='posture'>An independent desk study by Nikhil Sehgal on public documents only. It is not an output of the University of Bonn, the PALMWORK project or any company named.</p>
+<p class="lede">This page shows how the study went from six public documents to its findings. Every
+count on this page is read from the result files in the repository when the site is built.</p>
+
+<h2>The question</h2>
+<p>How do the policy documents of India's oil palm mission (NMEO-OP) and the sustainability
+disclosures of the processors expanding into North-East India represent labour (on plantations, in
+mills and in social reproduction) and its link to the environment? What do they leave out that only
+fieldwork with workers can show?</p>
+
+<h2>The approach in six steps</h2>
+<ol class="steps">
+<li><div class="step-title">Collect the documents</div>
+Six public documents: the 2021 approval of the oil palm mission, a December 2025 Lok Sabha answer on
+the North-East, the FY2024-25 BRSRs of Godrej Agrovet and Patanjali Foods, the RSPO and Sattva
+smallholder study, and the 2024 oilseeds-mission guidelines as context. Each file is fingerprinted
+(SHA-256) so that a rerun can prove it used the same documents; the text is extracted page by page.
+<div class="meta">Output: <code>data/corpus.csv</code>, <code>data/corpus_lock.csv</code>. The documents
+themselves stay with their owners and are not published.</div></li>
+<li><div class="step-title">Fix the codebook before coding</div>
+Ten codes taken from the four literatures named in the PALMWORK project (labour regime analysis,
+feminist labour geography, environmental labour studies, political ecology), and three levels for
+each document and code: <em>explicit</em> for oil palm, <em>generic</em> (company-wide or
+scheme-wide), <em>absent</em>.
+<div class="meta">Output: <code>codebook.yaml</code>. One change after the first round (growers and hired
+workers split), logged below.</div></li>
+<li><div class="step-title">Find candidate passages</div>
+A keyword search per code finds 567 candidate passages and marks those that sit near an
+oil palm or North-East word. Keywords only find candidates. They decide nothing.
+<div class="meta">Output: <code>results/candidate_counts.csv</code>.</div></li>
+<li><div class="step-title">Code the passages, in three layers</div>
+For each document and code, the strongest candidates go to a coding sheet. A keyword rule proposes a
+level; a first review reads each passage and corrects the proposal (41 proposals
+changed, 32 passages judged not relevant, 1 passage added by
+hand); the author then checks it. A passage can also count for a second code.
+<div class="meta">Output: <code>results/coding_log.csv</code> (all three layers for every row, without
+the document text) and <code>results/coded_passages.csv</code> (short excerpts with page numbers).</div></li>
+<li><div class="step-title">Check what decides each result</div>
+The level of a cell is the strongest relevant passage. The author checked 36 rows in two
+rounds (20 at the first checkpoint, 16 at the second), covering
+the deciding passage of all 36 non-empty cells. The author changed
+0 of the first-review levels.
+<div class="meta">Output: <code>results/presence_matrix.csv</code>.</div></li>
+<li><div class="step-title">Report from the files, not by hand</div>
+A script writes the figure, the numbers file and the results block of the README and the note. Tests
+check that every number in that block comes from the numbers file, that the text is clean, and that
+the pipeline gives the same output when it runs again.
+<div class="meta">Output: <code>results/manifest.json</code>, <code>results/presence_matrix.png</code>,
+<code>NOTE.md</code>, <code>NOTE.pdf</code>.</div></li>
+</ol>
+
+<h2>From candidates to findings</h2>
+<div class="funnel"><div style="width:100%"><b>567</b> candidate passages found by keyword</div><div style="width:92%"><b>137</b> rows on the coding sheet (best candidates per document and code, plus empty cells)</div><div style="width:84%"><b>120</b> passages read and coded</div><div style="width:76%"><b>88</b> passages that speak to their code (explicit or generic)</div><div style="width:68%"><b>60</b> cells in the result: 6 documents by 10 codes</div><div style="width:60%"><b>36</b> deciding passages, every one checked by the author</div></div>
+
+<h2>The documents</h2>
+<div class="table-wrap"><table><thead><tr><th>id</th><th>Owner</th><th>Kind</th><th>Period</th>
+<th>Pages</th><th>Candidates</th></tr></thead><tbody><tr><td><code>nmeo_guidelines</code></td><td>Ministry of Agriculture and Farmers Welfare, Government of India</td><td>policy guidelines</td><td>2021-22 to 2025-26</td><td>not obtained</td><td>-</td></tr><tr><td><code>nmeo_os_guidelines</code></td><td>Ministry of Agriculture and Farmers Welfare, Government of India</td><td>policy guidelines (oilseeds mission; context)</td><td>2024</td><td>50</td><td>90</td></tr><tr><td><code>pib_moafw_2021</code></td><td>Press Information Bureau, Government of India</td><td>press release (Ministry of Agriculture)</td><td>18 Aug 2021</td><td>1</td><td>11</td></tr><tr><td><code>ls_au2850_2025</code></td><td>Lok Sabha</td><td>parliamentary answer</td><td>Dec 2025</td><td>3</td><td>3</td></tr><tr><td><code>godrej_brsr_fy25</code></td><td>Godrej Agrovet Ltd</td><td>BRSR</td><td>FY2024-25</td><td>44</td><td>145</td></tr><tr><td><code>patanjali_brsr_fy25</code></td><td>Patanjali Foods Ltd</td><td>BRSR</td><td>FY2024-25</td><td>32</td><td>142</td></tr><tr><td><code>rspo_sattva</code></td><td>RSPO and Sattva Consulting</td><td>smallholder diagnostic study</td><td>India (Assam and Andhra Pradesh)</td><td>65</td><td>176</td></tr></tbody></table></div>
+<p class="meta">The NMEO-OP operational guidelines could not be obtained: the government servers refused
+the download, so the study names their absence as a limit.</p>
+
+<h2>The codebook</h2>
+<div class="table-wrap"><table><thead><tr><th>Code</th><th>Label</th><th>What it covers</th>
+<th>Example keywords</th></tr></thead><tbody><tr><td><code>L1a</code></td><td>Who works - growers</td><td>Growers who cultivate oil palm on their own or family land (smallholders, farmers, cultivators), including their gender and social category.</td><td>farmers?, growers?, smallholders?, cultivators? ...</td></tr><tr><td><code>L1b</code></td><td>Who works - hired workers</td><td>People hired to work on plantations, on growers&#x27; farms or in mills (permanent, contract or casual, family, migrant), and their gender.</td><td>workers?, employees?, workforce, labou?r(ers?)? ...</td></tr><tr><td><code>L2</code></td><td>Pay and price</td><td>Wages, minimum wage, remuneration of workers; the price growers receive for fresh fruit bunches, including the viability price.</td><td>wages?, minimum wage, remuneration, salar(y|ies) ...</td></tr><tr><td><code>L3</code></td><td>Recruitment and control</td><td>How labour is recruited and organised (contractors, intermediaries, outsourcing, supervision).</td><td>contractors?, recruit(ment|ed|ing)?, intermediar(y|ies), outsourc(e|ed|ing) ...</td></tr><tr><td><code>L4</code></td><td>Health and safety</td><td>Occupational health and safety on plantations and in mills (chemicals, injuries, heat, protective equipment).</td><td>health and safety, safety, accidents?, injur(y|ies) ...</td></tr><tr><td><code>L5</code></td><td>Social reproduction</td><td>What sustains workers and households beyond the wage (housing, health care, insurance, maternity, childcare, schooling, water, food).</td><td>housing, accommodation, health (care|insurance), medical ...</td></tr><tr><td><code>L6</code></td><td>Voice</td><td>Collective and individual voice (unions, freedom of association, collective bargaining, grievance and complaint mechanisms).</td><td>(trade )?unions?, associations?, collective bargaining, grievances? ...</td></tr><tr><td><code>E1</code></td><td>Land and tenure</td><td>The land oil palm takes (forest, shifting cultivation or jhum land, customary or community land), conversion and tenure.</td><td>deforestation, forests?, jhum, shifting cultivation ...</td></tr><tr><td><code>E2</code></td><td>Environment of work</td><td>Environmental conditions that bear on work and growers (water, soil, heat, climate, effluent, biodiversity).</td><td>water, irrigation, soil, heat ...</td></tr><tr><td><code>S1</code></td><td>Standards and certification</td><td>Sustainability standards, certification, traceability and audits applied to palm.</td><td>RSPO, certif(ied|ication), traceab(le|ility), audits? ...</td></tr></tbody></table></div>
+<p><b>Levels.</b> <em>explicit</em>: the document says something about the code for oil palm work,
+workers, growers or places. <em>generic</em>: it addresses the code company-wide or scheme-wide,
+without tying it to oil palm. <em>absent</em>: it does not address the code. On the coding sheet a
+passage can also be <em>not relevant</em> when a keyword matched in another sense (for example
+"Union Cabinet" for the code on trade unions).</p>
+
+<h2>Changes to the plan</h2>
+<p>Every change, with its date and reason. None was made to alter a result.</p>
+<p>Every change to the plan of 18 November 2026, with date and reason. None was made after looking at
+a result in order to change that result.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Change</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18 Nov 2026</td>
+<td>AWL Agri Business removed from the corpus</td>
+<td>Mainly an importer and refiner of palm oil; no documented role in the North-East plantation expansion, so outside the question.</td>
+</tr>
+<tr>
+<td>18 Nov 2026</td>
+<td>The Cabinet version of the PIB release (PRID 1746942) removed; the Ministry of Agriculture version (PRID 1746943) kept</td>
+<td>The two texts are almost identical; keeping both would count the same statements twice. The Ministry version adds the seed-garden point for the North-East.</td>
+</tr>
+<tr>
+<td>18 Nov 2026</td>
+<td>Level "vague" replaced by "generic"; passage level "not_relevant" added</td>
+<td>BRSRs are company-wide reports. The question is whether a statement is tied to oil palm, so "generic" (company-wide or scheme-wide) is the sharper category. Keyword hits that do not speak to the code need their own label. Decided before any document was coded.</td>
+</tr>
+<tr>
+<td>18 Nov 2026</td>
+<td>Assistant review columns (agent_level, agent_also, agent_note) added between the keyword rule and the author's check</td>
+<td>Keeps the record of who decided what: rule, then first review, then the author.</td>
+</tr>
+<tr>
+<td>18 Nov 2026</td>
+<td>NMEO-OP Operational Guidelines and Lok Sabha answer AU2850 not yet in the corpus</td>
+<td>The government servers refuse scripted downloads from outside India. They are listed with <code>manual = yes</code> and enter the analysis when saved by hand.</td>
+</tr>
+<tr>
+<td>18 Nov 2026</td>
+<td>Lok Sabha answer AU2850 (17 Dec 2025) added, saved by hand by the author</td>
+<td>Same document as listed; the government server refused the scripted download.</td>
+</tr>
+<tr>
+<td>18 Nov 2026</td>
+<td>NMEO-Oilseeds Operational Guidelines (2024) added as a context document</td>
+<td>Saved by hand by the author. It is the sister mission for annual oilseeds and does not mention oil palm, so it shows how the wider edible-oil policy frames labour. The NMEO-OP (oil palm) guidelines are still missing.</td>
+</tr>
+<tr>
+<td>18 Nov 2026</td>
+<td>Codebook v2: L1 "who works" split into L1a growers and L1b hired workers</td>
+<td>Author's decision at CP1. Labour regime analysis separates growers on their own land from wage workers on plantations, farms and mills. v1 reviews were carried over by matching passages (<code>scripts/migrate_review.py</code>); the v1 sheet is kept.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h2>Limits</h2>
+<ul>
+<li>Documents show what organisations choose to say. Absence in a document is not absence on the ground.</li>
+<li>BRSR covers a company's own workforce, so it cannot be expected to show workers employed by growers or contractors.</li>
+<li>The NMEO-OP operational guidelines are missing.</li>
+<li>One coder: the author checked every deciding passage, but no second coder assessed reliability.</li>
+<li>Six documents, in English, from one financial year for the companies; keyword search can miss passages that use other words.</li>
+</ul>
+
+<h2>Rebuild it yourself</h2>
+<pre><code>uv sync
+uv run python run_all.py            # fetch, fingerprint, extract, code, report, site
+uv run pytest
+uv run python scripts/build_pdf.py  # NOTE.pdf</code></pre>
+<footer>Built from the result files by <code>site/build.py</code>.</footer></main></body></html>

@@ -4,7 +4,7 @@
 only. It is not an output of the University of Bonn, the PALMWORK project or any company named.
 
 - Note (4 pages): [`NOTE.md`](NOTE.md) and [`NOTE.pdf`](NOTE.pdf)
-- Results page: https://oilpalm-labour-paperwork.vercel.app
+- Results page: https://oilpalm-labour-paperwork.vercel.app (methodology: https://oilpalm-labour-paperwork.vercel.app/method.html)
 
 ## Question
 
