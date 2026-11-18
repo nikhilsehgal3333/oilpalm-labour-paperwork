@@ -7,10 +7,14 @@ import re
 import shutil
 from pathlib import Path
 
+import sys
+
 import markdown
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
+sys.path.insert(0, str(SITE))
+from method_parts import DIAGRAM_CSS, OPEN_SCRIPT  # noqa: E402
 REPO = "https://github.com/nikhilsehgal3333/oilpalm-labour-paperwork"
 CSS = """
 :root { --bg:#fbfbf9; --fg:#1b1b1b; --muted:#5b5b5b; --line:#d9d9d4; --accent:#08519c; }
@@ -152,6 +156,14 @@ def build_method() -> Path:
     # evenly stepped widths show the order of the stages; the counts carry the size
     funnel = "".join(f'<div style="width:{100 - 8 * i}%"><b>{n}</b> {text}</div>'
                      for i, (n, text) in enumerate(stages))
+    cell = {(r["doc"], r["code"]): r for r in counts}
+    gl1b = cell.get(("godrej_brsr_fy25", "L1b"), {"candidates": "?", "near_palm_word": "?"})
+    obtained = sum(1 for c in corpus if lock.get(c["id"], {}).get("status") == "ok")
+    from method_parts import detail_panels, svg_diagram
+    diagram = svg_diagram(m, len(log), len(passages), obtained)
+    details = detail_panels(m, log, passages, relevant, not_relevant, changed_by_review,
+                            added_by_review, checked, changed_by_author, rounds, gl1b, obtained,
+                            len(corpus))
     body = f"""
 <p class="lede">This page shows how the study went from six public documents to its findings. Every
 count on this page is read from the result files in the repository when the site is built.</p>
@@ -162,46 +174,11 @@ disclosures of the processors expanding into North-East India represent labour (
 mills and in social reproduction) and its link to the environment? What do they leave out that only
 fieldwork with workers can show?</p>
 
-<h2>The approach in six steps</h2>
-<ol class="steps">
-<li><div class="step-title">Collect the documents</div>
-Six public documents: the 2021 approval of the oil palm mission, a December 2025 Lok Sabha answer on
-the North-East, the FY2024-25 BRSRs of Godrej Agrovet and Patanjali Foods, the RSPO and Sattva
-smallholder study, and the 2024 oilseeds-mission guidelines as context. Each file is fingerprinted
-(SHA-256) so that a rerun can prove it used the same documents; the text is extracted page by page.
-<div class="meta">Output: <code>data/corpus.csv</code>, <code>data/corpus_lock.csv</code>. The documents
-themselves stay with their owners and are not published.</div></li>
-<li><div class="step-title">Fix the codebook before coding</div>
-Ten codes taken from the four literatures named in the PALMWORK project (labour regime analysis,
-feminist labour geography, environmental labour studies, political ecology), and three levels for
-each document and code: <em>explicit</em> for oil palm, <em>generic</em> (company-wide or
-scheme-wide), <em>absent</em>.
-<div class="meta">Output: <code>codebook.yaml</code>. One change after the first round (growers and hired
-workers split), logged below.</div></li>
-<li><div class="step-title">Find candidate passages</div>
-A keyword search per code finds {m['candidates']} candidate passages and marks those that sit near an
-oil palm or North-East word. Keywords only find candidates. They decide nothing.
-<div class="meta">Output: <code>results/candidate_counts.csv</code>.</div></li>
-<li><div class="step-title">Code the passages, in three layers</div>
-For each document and code, the strongest candidates go to a coding sheet. A keyword rule proposes a
-level; a first review reads each passage and corrects the proposal ({len(changed_by_review)} proposals
-changed, {len(not_relevant)} passages judged not relevant, {len(added_by_review)} passage added by
-hand); the author then checks it. A passage can also count for a second code.
-<div class="meta">Output: <code>results/coding_log.csv</code> (all three layers for every row, without
-the document text) and <code>results/coded_passages.csv</code> (short excerpts with page numbers).</div></li>
-<li><div class="step-title">Check what decides each result</div>
-The level of a cell is the strongest relevant passage. The author checked {len(checked)} rows in two
-rounds ({rounds.get('CP1', 0)} at the first checkpoint, {rounds.get('S3', 0)} at the second), covering
-the deciding passage of all {m['deciding_total']} non-empty cells. The author changed
-{len(changed_by_author)} of the first-review levels.
-<div class="meta">Output: <code>results/presence_matrix.csv</code>.</div></li>
-<li><div class="step-title">Report from the files, not by hand</div>
-A script writes the figure, the numbers file and the results block of the README and the note. Tests
-check that every number in that block comes from the numbers file, that the text is clean, and that
-the pipeline gives the same output when it runs again.
-<div class="meta">Output: <code>results/manifest.json</code>, <code>results/presence_matrix.png</code>,
-<code>NOTE.md</code>, <code>NOTE.pdf</code>.</div></li>
-</ol>
+<h2>The process at a glance</h2>
+{diagram}
+
+<h2>Each step in detail</h2>
+{details}
 
 <h2>From candidates to findings</h2>
 <div class="funnel">{funnel}</div>
@@ -221,7 +198,7 @@ without tying it to oil palm. <em>absent</em>: it does not address the code. On 
 passage can also be <em>not relevant</em> when a keyword matched in another sense (for example
 "Union Cabinet" for the code on trade unions).</p>
 
-<h2>Changes to the plan</h2>
+<h2 id="deviations">Changes to the plan</h2>
 <p>Every change, with its date and reason. None was made to alter a result.</p>
 {deviations}
 
@@ -249,14 +226,14 @@ uv run python scripts/build_pdf.py  # NOTE.pdf</code></pre>
         "<title>Methodology: labour in the paperwork</title>"
         "<meta name='description' content='How the desk study on labour in India&#39;s oil palm "
         "paperwork was carried out, step by step.'>"
-        f"<style>{CSS}</style></head><body><main>"
+        f"<style>{CSS}{DIAGRAM_CSS}</style></head><body><main>"
         "<h1>Methodology</h1>"
         f"<div class='bar'>{' · '.join(links)}</div>"
         "<p class='posture'>An independent desk study by Nikhil Sehgal on public documents only. It is "
         "not an output of the University of Bonn, the PALMWORK project or any company named.</p>"
         f"{body}"
         "<footer>Built from the result files by <code>site/build.py</code>.</footer>"
-        "</main></body></html>")
+        f"</main>{OPEN_SCRIPT}</body></html>")
     out = SITE / "method.html"
     out.write_text(page, encoding="utf-8", newline="\n")
     return out

@@ -3,3 +3,4 @@
 !/vercel.json
 /site/__pycache__
 /site/build.py
+/site/method_parts.py
