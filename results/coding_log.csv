@@ -1,0 +1,138 @@
+nr,doc,pdf_page,code,keyword_rule,first_review,first_review_note,also_codes,author_check,author_note,final_level,checked_by_author
+1,nmeo_os_guidelines,17,L1a,explicit_palm,generic,FPOs and cooperatives as value chain partners of oilseed clusters,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+2,nmeo_os_guidelines,16,L1a,explicit_palm,generic,"clusters of at least 200 farmers (100 in North-eastern and hilly states); North-East mention concerns oilseed clusters, not oil palm",,,,generic,no
+3,nmeo_os_guidelines,21,L1a,generic,generic,farmer training and field schools,,,,generic,no
+4,nmeo_os_guidelines,28,L1b,generic,generic,"women community workers (Krishi Sakhi, SHGs) for scheme data collection; not farm labour",,generic,"agreed with first review (author, CP1, 18 Nov 2026)",generic,yes
+5,nmeo_os_guidelines,35,L1b,generic,generic,Krishi Sakhis (women community leaders) collect and update data,,generic,"agreed with first review (author, CP1, 18 Nov 2026)",generic,yes
+6,nmeo_os_guidelines,5,L2,generic,generic,farmer incomes as a mission aim,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+7,nmeo_os_guidelines,24,L3,generic,not_relevant,supervision of seed variety testing,,,,not_relevant,no
+8,nmeo_os_guidelines,27,L3,generic,not_relevant,demonstrations under ICAR supervision,,,,not_relevant,no
+9,nmeo_os_guidelines,32,L3,generic,not_relevant,field schools under supervision of support agencies,,,,not_relevant,no
+10,nmeo_os_guidelines,28,L4,generic,not_relevant,"fertiliser dose; agronomy, not safety",,,,not_relevant,no
+11,nmeo_os_guidelines,32,L4,generic,not_relevant,pest management kit budget; no worker safety,,,,not_relevant,no
+12,nmeo_os_guidelines,32,L5,generic,not_relevant,"farmer field school, not schooling",,,,not_relevant,no
+13,nmeo_os_guidelines,3,L5,generic,not_relevant,table of contents,,,,not_relevant,no
+14,nmeo_os_guidelines,13,L5,generic,not_relevant,farmer field schools,,,,not_relevant,no
+15,nmeo_os_guidelines,7,L6,generic,not_relevant,"'Union Minister', governance structure",,,,not_relevant,no
+16,nmeo_os_guidelines,8,L6,generic,not_relevant,information campaign with agencies,,,,not_relevant,no
+17,nmeo_os_guidelines,18,L6,generic,not_relevant,industry associations as eligible corporations,,,,not_relevant,no
+18,nmeo_os_guidelines,30,E1,explicit_palm,generic,tree-borne oilseeds sourced from forests; not oil palm,,,,generic,no
+19,nmeo_os_guidelines,31,E1,explicit_palm,generic,plantation of tree-borne oilseeds on wasteland and degraded forest land,,generic,"agreed with first review (author, CP1, 18 Nov 2026)",generic,yes
+20,nmeo_os_guidelines,4,E2,generic,not_relevant,table of contents,,,,not_relevant,no
+21,nmeo_os_guidelines,8,E2,generic,generic,convergence with micro-irrigation,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+22,nmeo_os_guidelines,10,E2,generic,generic,coordination with irrigation departments,,,,generic,no
+23,nmeo_os_guidelines,22,S1,generic,not_relevant,"performance audits of value chain partners, not sustainability",,,,not_relevant,no
+24,nmeo_os_guidelines,23,S1,generic,not_relevant,seed certification,,,,not_relevant,no
+25,nmeo_os_guidelines,24,S1,generic,not_relevant,seed quality certification,,,,not_relevant,no
+26,pib_moafw_2021,1,L1a,explicit_palm,explicit_palm,headline: price assurance to oil palm farmers,,,,explicit_palm,no
+27,pib_moafw_2021,1,L1a,explicit_palm,explicit_palm,oil palm farmers produce FFBs; price linked to international CPO prices,L2,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+28,pib_moafw_2021,1,L1a,explicit_palm,explicit_palm,repeats the headline,,,,explicit_palm,no
+29,pib_moafw_2021,,L1b,absent,,,,,,absent,no
+30,pib_moafw_2021,1,L2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+31,pib_moafw_2021,1,L2,explicit_palm,explicit_palm,headline repeats the price assurance of row 2,,,,explicit_palm,no
+32,pib_moafw_2021,1,L2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+33,pib_moafw_2021,,L3,absent,absent,,,,,absent,no
+34,pib_moafw_2021,,L4,absent,absent,,,,,absent,no
+35,pib_moafw_2021,,L5,absent,absent,,,,,absent,no
+36,pib_moafw_2021,1,L6,explicit_palm,not_relevant,"'Union Cabinet', not a trade union",,not_relevant,"agreed with first review (author, CP1, 18 Nov 2026)",not_relevant,yes
+37,pib_moafw_2021,,E1,absent,absent,,,,,absent,no
+38,pib_moafw_2021,,E2,absent,absent,,,,,absent,no
+39,pib_moafw_2021,,S1,absent,absent,,,,,absent,no
+40,ls_au2850_2025,1,L1a,explicit_palm,not_relevant,agarwood growers,,,,not_relevant,no
+41,ls_au2850_2025,1,L1a,explicit_palm,explicit_palm,"cumulative oil palm area in the North-East (68,324 ha by 31 March 2025)",,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+42,ls_au2850_2025,2,L1a,explicit_palm,explicit_palm,"mills in Arunachal Pradesh and Mizoram, new mill for Assam; 'benefit farmers'",,,,explicit_palm,no
+43,ls_au2850_2025,,L1b,absent,,,,,,absent,no
+44,ls_au2850_2025,,L2,absent,,,,,,absent,no
+45,ls_au2850_2025,,L3,absent,,,,,,absent,no
+46,ls_au2850_2025,,L4,absent,,,,,,absent,no
+47,ls_au2850_2025,,L5,absent,,,,,,absent,no
+48,ls_au2850_2025,,L6,absent,,,,,,absent,no
+49,ls_au2850_2025,,E1,absent,,,,,,absent,no
+50,ls_au2850_2025,,E2,absent,,,,,,absent,no
+51,ls_au2850_2025,,S1,absent,,,,,,absent,no
+52,godrej_brsr_fy25,40,L1a,explicit_palm,explicit_palm,smallholder farmers; sustainable farm practices,E2,explicit_palm,"agreed with first review (author, S3, 18 Nov 2026)",explicit_palm,yes
+53,godrej_brsr_fy25,42,L1a,explicit_palm,explicit_palm,smallholders with small and marginal holdings in allocated districts,E1,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+54,godrej_brsr_fy25,3,L1a,explicit_palm,generic,"farmers in general, company profile",,,,generic,no
+55,godrej_brsr_fy25,33,L1b,generic,generic,"human rights assessment 'across factories' incl. contract workers, women, migrants; not plantations",L5,generic,"agreed with first review (author, CP1, 18 Nov 2026)",generic,yes
+56,godrej_brsr_fy25,4,L1b,generic,generic,,,,,generic,no
+57,godrej_brsr_fy25,21,L1b,generic,generic,,,,,generic,no
+58,godrej_brsr_fy25,30,L2,generic,generic,,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+59,godrej_brsr_fy25,31,L2,generic,generic,,,,,generic,no
+60,godrej_brsr_fy25,42,L2,generic,generic,,,,,generic,no
+61,godrej_brsr_fy25,26,L3,generic,generic,,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+62,godrej_brsr_fy25,16,L3,generic,generic,,,,,generic,no
+63,godrej_brsr_fy25,22,L3,generic,not_relevant,"supervisors in a whistle-blower clause, not labour control",L6,,,not_relevant,no
+64,godrej_brsr_fy25,9,L4,generic,generic,,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+65,godrej_brsr_fy25,24,L4,generic,generic,,,,,generic,no
+66,godrej_brsr_fy25,25,L4,generic,generic,,,,,generic,no
+67,godrej_brsr_fy25,20,L5,generic,generic,,,,,generic,no
+68,godrej_brsr_fy25,24,L5,generic,generic,,,,,generic,no
+69,godrej_brsr_fy25,25,L5,generic,generic,,,,,generic,no
+70,godrej_brsr_fy25,6,L6,generic,generic,,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+71,godrej_brsr_fy25,40,L6,explicit_palm,not_relevant,"trade and industry chambers, not workers' voice",,,,not_relevant,no
+72,godrej_brsr_fy25,22,L6,generic,generic,,,,,generic,no
+73,godrej_brsr_fy25,42,E1,explicit_palm,explicit_palm,smallholder growers with small and marginal holdings in allocated districts,L1a,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+74,godrej_brsr_fy25,7,E1,generic,generic,,,,,generic,no
+75,godrej_brsr_fy25,13,E1,generic,not_relevant,BRSR template list of standards (FSC named as an example),,,,not_relevant,no
+76,godrej_brsr_fy25,35,E2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+77,godrej_brsr_fy25,40,E2,explicit_palm,explicit_palm,smallholder farmers named; irrigation practice,L1a,,,explicit_palm,no
+78,godrej_brsr_fy25,7,E2,generic,generic,,,,,generic,no
+79,godrej_brsr_fy25,18,S1,explicit_palm,explicit_palm,,,explicit_palm,"agreed with first review (author, S3, 18 Nov 2026)",explicit_palm,yes
+80,godrej_brsr_fy25,11,S1,explicit_palm,not_relevant,traceability refers to dairy; palm part is drone monitoring,,,,not_relevant,no
+81,godrej_brsr_fy25,18,S1,explicit_palm,explicit_palm,"FFB from farmers in Government-allocated districts, over 90% of input costs",L1a;E1,,,explicit_palm,no
+82,patanjali_brsr_fy25,7,L1a,explicit_palm,explicit_palm,"63,915 farmers through direct FFB procurement",E2,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+83,patanjali_brsr_fy25,8,L1a,explicit_palm,explicit_palm,"FFBs procured from 63,915 farmers; nurseries and godowns",,,,explicit_palm,no
+84,patanjali_brsr_fy25,11,L1a,explicit_palm,explicit_palm,100% of growers' FFBs purchased,,,,explicit_palm,no
+85,patanjali_brsr_fy25,13,L1b,generic,generic,,,,,generic,no
+86,patanjali_brsr_fy25,28,L1b,explicit_palm,generic,location wage table; no palm content,,generic,"agreed with first review (author, CP1, 18 Nov 2026)",generic,yes
+87,patanjali_brsr_fy25,3,L1b,generic,generic,,,,,generic,no
+88,patanjali_brsr_fy25,28,L2,explicit_palm,generic,same location wage table,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+89,patanjali_brsr_fy25,20,L2,generic,generic,,,,,generic,no
+90,patanjali_brsr_fy25,20,L2,generic,generic,,,,,generic,no
+91,patanjali_brsr_fy25,6,L3,generic,not_relevant,third-party product certification,,,,not_relevant,no
+92,patanjali_brsr_fy25,15,L3,generic,not_relevant,hazard reporting to supervisors,L4;L6,,,not_relevant,no
+93,patanjali_brsr_fy25,17,L3,generic,not_relevant,supervision of safety practice,L4,,,not_relevant,no
+94,patanjali_brsr_fy25,15,L4,generic,generic,,,generic,"agreed with first review (author, CP1, 18 Nov 2026)",generic,yes
+95,patanjali_brsr_fy25,16,L4,generic,generic,,,generic,"agreed with first review (author, CP1, 18 Nov 2026)",generic,yes
+96,patanjali_brsr_fy25,7,L4,explicit_palm,generic,OHSAS 45001 among certifications of manufacturing units,S1,generic,"agreed with first review (author, CP1, 18 Nov 2026)",generic,yes
+97,patanjali_brsr_fy25,12,L5,generic,generic,,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+98,patanjali_brsr_fy25,12,L5,generic,generic,,,,,generic,no
+99,patanjali_brsr_fy25,6,L5,generic,not_relevant,consumer nutrition,,,,not_relevant,no
+100,patanjali_brsr_fy25,4,L6,generic,generic,,,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes
+101,patanjali_brsr_fy25,5,L6,generic,generic,,,,,generic,no
+102,patanjali_brsr_fy25,13,L6,generic,generic,,,,,generic,no
+103,patanjali_brsr_fy25,7,E1,generic,not_relevant,BRSR template list of standards,,,,not_relevant,no
+104,patanjali_brsr_fy25,26,E1,generic,not_relevant,template question on sensitive areas; no answer in the passage,,,,not_relevant,no
+105,patanjali_brsr_fy25,6,E2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+106,patanjali_brsr_fy25,7,E2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+107,patanjali_brsr_fy25,25,E2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+108,patanjali_brsr_fy25,7,S1,explicit_palm,explicit_palm,,,,,explicit_palm,no
+109,patanjali_brsr_fy25,11,S1,explicit_palm,explicit_palm,"names a new oil palm mill at Niglok, Arunachal Pradesh",,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+110,patanjali_brsr_fy25,6,S1,explicit_palm,explicit_palm,,,,,explicit_palm,no
+111,rspo_sattva,24,L1a,explicit_palm,explicit_palm,grower associations in Assam,L6,explicit_palm,"agreed with first review (author, S3, 18 Nov 2026)",explicit_palm,yes
+112,rspo_sattva,14,L1a,explicit_palm,not_relevant,method of the study (interviews with stakeholders),,,,not_relevant,no
+113,rspo_sattva,26,L1a,explicit_palm,explicit_palm,no oil palm FPOs found in Andhra Pradesh; corporate involvement,L6,,,explicit_palm,no
+114,rspo_sattva,54,L1b,explicit_palm,explicit_palm,,,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+115,rspo_sattva,53,L1b,explicit_palm,explicit_palm,,,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+116,rspo_sattva,17,L1b,explicit_palm,not_relevant,"gender of growers (95% male), not of hired workers",L1a,not_relevant,"agreed with first review (author, CP1, 18 Nov 2026)",not_relevant,yes
+117,rspo_sattva,8,L2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+118,rspo_sattva,12,L2,explicit_palm,not_relevant,table of contents,,,,not_relevant,no
+119,rspo_sattva,19,L2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+120,rspo_sattva,27,L3,explicit_palm,explicit_palm,intermediaries; growers paid as little as Rs 5 per kg against Rs 9.80,L2,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+121,rspo_sattva,9,L3,explicit_palm,not_relevant,organisation chart of the mission,,,,not_relevant,no
+122,rspo_sattva,27,L3,generic,explicit_palm,"trading company and local intermediaries in Goalpara, Assam; payment modes",L2,,,explicit_palm,no
+123,rspo_sattva,35,L4,explicit_palm,explicit_palm,pesticide knowledge and unregulated use among growers,E2,explicit_palm,"agreed with first review (author, CP1, 18 Nov 2026)",explicit_palm,yes
+124,rspo_sattva,,L5,absent,absent,,,,,absent,no
+125,rspo_sattva,9,L6,explicit_palm,not_relevant,processors' associations as implementers,,,,not_relevant,no
+126,rspo_sattva,24,L6,explicit_palm,explicit_palm,,,,,explicit_palm,no
+127,rspo_sattva,37,L6,explicit_palm,explicit_palm,growers not reimbursed for transport; FPOs and associations help,L2,,,explicit_palm,no
+128,rspo_sattva,42,E1,explicit_palm,explicit_palm,,,explicit_palm,"agreed with first review (author, S3, 18 Nov 2026)",explicit_palm,yes
+129,rspo_sattva,43,E1,explicit_palm,explicit_palm,,,,,explicit_palm,no
+130,rspo_sattva,34,E1,explicit_palm,explicit_palm,,,,,explicit_palm,no
+131,rspo_sattva,39,E2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+132,rspo_sattva,49,E2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+133,rspo_sattva,10,E2,explicit_palm,explicit_palm,,,,,explicit_palm,no
+134,rspo_sattva,38,S1,explicit_palm,explicit_palm,,,explicit_palm,"agreed with first review (author, S3, 18 Nov 2026)",explicit_palm,yes
+135,rspo_sattva,4,S1,explicit_palm,explicit_palm,,,,,explicit_palm,no
+136,rspo_sattva,10,S1,explicit_palm,explicit_palm,,,,,explicit_palm,no
+137,patanjali_brsr_fy25,22,L3,,generic,added: human rights policy covers contractors; freedom of association named,L6,generic,"agreed with first review (author, S3, 18 Nov 2026)",generic,yes

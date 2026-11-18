@@ -1,0 +1,78 @@
+# Codebook v2 (18 Nov 2026). Deductive, from the four literatures named in the PALMWORK call:
+# labour regime analysis, feminist labour geography, environmental labour studies, political ecology.
+# v1 refined on the PIB release and the Godrej Agrovet BRSR before any coding.
+# v2 (CP1, author's decision): L1 "who works" split into L1a growers and L1b hired workers.
+#
+# Levels per document and code:
+#   explicit_palm : the document says something about this code for oil palm work, workers,
+#                   growers or places (plantation, mill, fresh fruit bunches, North-East)
+#   generic       : the document addresses the code, but company-wide or scheme-wide, not tied to palm
+#   absent        : the document does not address the code
+# Keywords only find candidate passages. The level is decided by reading the passage.
+
+palm_context: '\b(oil[ -]?palm|palm oil|palm|fresh fruit bunch(es)?|FFB|plantation(s)?|mill(s)?|crude palm|CPO|north[ -]?east(ern)?|NER|assam|mizoram|tripura|manipur|arunachal|nagaland|meghalaya)\b'
+
+codes:
+  L1a:
+    label: Who works - growers
+    description: Growers who cultivate oil palm on their own or family land (smallholders,
+      farmers, cultivators), including their gender and social category.
+    keywords: ['\bfarmers?\b', '\bgrowers?\b', '\bsmallholders?\b', '\bcultivators?\b',
+      '\bsmall and marginal\b', '\bfarmer producer\b', '\bFPOs?\b']
+  L1b:
+    label: Who works - hired workers
+    description: People hired to work on plantations, on growers' farms or in mills (permanent,
+      contract or casual, family, migrant), and their gender.
+    keywords: ['\bworkers?\b', '\bemployees?\b', '\bworkforce\b', '\blabou?r(ers?)?\b', '\bpermanent\b',
+      '\bcontract(ual)?\b', '\bcasual\b', '\btemporary\b', '\bmigrants?\b', '\bfamily labou?r\b',
+      '\bharvesters?\b', '\bwomen\b', '\bfemale\b', '\bgender\b']
+  L2:
+    label: Pay and price
+    description: Wages, minimum wage, remuneration of workers; the price growers receive for fresh
+      fruit bunches, including the viability price.
+    keywords: ['\bwages?\b', '\bminimum wage\b', '\bremuneration\b', '\bsalar(y|ies)\b', '\bviability\b',
+      '\bprice (assurance|support)\b', '\bincomes?\b', '\bbonus\b']
+  L3:
+    label: Recruitment and control
+    description: How labour is recruited and organised (contractors, intermediaries, outsourcing,
+      supervision).
+    keywords: ['\bcontractors?\b', '\brecruit(ment|ed|ing)?\b', '\bintermediar(y|ies)\b',
+      '\boutsourc(e|ed|ing)\b', '\bthird[- ]party\b', '\bsupervis(e|ion|ors?)\b']
+  L4:
+    label: Health and safety
+    description: Occupational health and safety on plantations and in mills (chemicals, injuries,
+      heat, protective equipment).
+    keywords: ['\bhealth and safety\b', '\bsafety\b', '\baccidents?\b', '\binjur(y|ies)\b',
+      '\bfatalit(y|ies)\b', '\bpesticides?\b', '\bchemicals?\b', '\bhazard(s|ous)?\b', '\bPPE\b',
+      '\boccupational\b']
+  L5:
+    label: Social reproduction
+    description: What sustains workers and households beyond the wage (housing, health care,
+      insurance, maternity, childcare, schooling, water, food).
+    keywords: ['\bhousing\b', '\baccommodation\b', '\bhealth (care|insurance)\b', '\bmedical\b',
+      '\bmaternity\b', '\bpaternity\b', '\bday ?care\b', '\bcr[eè]che\b', '\bschool(s|ing)?\b',
+      '\bdrinking water\b', '\bsanitation\b', '\bnutrition\b']
+  L6:
+    label: Voice
+    description: Collective and individual voice (unions, freedom of association, collective
+      bargaining, grievance and complaint mechanisms).
+    keywords: ['\b(trade )?unions?\b', '\bassociations?\b', '\bcollective bargaining\b',
+      '\bgrievances?\b', '\bcomplaints?\b', '\bredress(al)?\b']
+  E1:
+    label: Land and tenure
+    description: The land oil palm takes (forest, shifting cultivation or jhum land, customary or
+      community land), conversion and tenure.
+    keywords: ['\bdeforestation\b', '\bforests?\b', '\bjhum\b', '\bshifting cultivation\b',
+      '\bcustomary\b', '\btribal\b', '\bland (use|conversion|tenure|holding)s?\b', '\bwasteland\b',
+      '\bdegraded land\b', '\blease\b']
+  E2:
+    label: Environment of work
+    description: Environmental conditions that bear on work and growers (water, soil, heat,
+      climate, effluent, biodiversity).
+    keywords: ['\bwater\b', '\birrigation\b', '\bsoil\b', '\bheat\b', '\bclimate\b',
+      '\bbiodiversity\b', '\beffluent\b', '\bPOME\b', '\bdrought\b']
+  S1:
+    label: Standards and certification
+    description: Sustainability standards, certification, traceability and audits applied to palm.
+    keywords: ['\bRSPO\b', '\bcertif(ied|ication)\b', '\btraceab(le|ility)\b', '\baudits?\b',
+      '\bIPOS\b', '\bsustainable sourcing\b']
