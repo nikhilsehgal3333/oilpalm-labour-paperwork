@@ -1,0 +1,5 @@
+/*
+!/site
+!/vercel.json
+/site/__pycache__
+/site/build.py
